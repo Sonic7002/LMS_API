@@ -4,8 +4,6 @@ from app.db.base import Base
 from app.db.session import engine
 
 Base.metadata.create_all(bind=engine)
-
-
 app = FastAPI(title="Library Management System")
 
 app.include_router(users.router, prefix="/api/v1")
