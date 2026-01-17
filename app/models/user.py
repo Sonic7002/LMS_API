@@ -1,7 +1,8 @@
 from uuid import uuid4
-from sqlalchemy import String
+from datetime import datetime
+from sqlalchemy import String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
-from ..base import Base
+from ..db.base import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -9,6 +10,6 @@ class User(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key = True, default = lambda: str(uuid4()))
     name: Mapped[str] = mapped_column(String(100), nullable = False)
     email: Mapped[str] = mapped_column(String(255), unique = True, nullable = False)
-    role: Mapped[str] = mapped_column(String(20), nullable = False)
-
-    # auth will come later
+    hashed_password: Mapped[str] = mapped_column(String(225), nullable = False)
+    role: Mapped[str] = mapped_column(String(255), nullable = False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default = datetime.utcnow(), nullable = False)

@@ -2,7 +2,6 @@ from uuid import UUID
 from ..repos.book_repo import BookRepo
 from ..schemas.book import BookCreate
 
-
 class BookService:
     def __init__(self, repo: BookRepo):
         self.repo = repo

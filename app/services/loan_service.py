@@ -5,14 +5,8 @@ from ..repos.book_repo import BookRepo
 from ..repos.user_repo import UserRepo
 from ..schemas.loan import LoanStatus
 
-
 class LoanService:
-    def __init__(
-        self,
-        loan_repo: LoanRepo,
-        book_repo: BookRepo,
-        user_repo: UserRepo,
-    ):
+    def __init__(self, loan_repo: LoanRepo, book_repo: BookRepo, user_repo: UserRepo):
         self.loan_repo = loan_repo
         self.book_repo = book_repo
         self.user_repo = user_repo
@@ -29,11 +23,7 @@ class LoanService:
 
         # prevent duplicate active loan
         for loan in self.loan_repo.list_all():
-            if (
-                loan["user_id"] == user_id
-                and loan["book_id"] == book_id
-                and loan["status"] == LoanStatus.ISSUED
-            ):
+            if (loan["user_id"] == user_id and loan["book_id"] == book_id and loan["status"] == LoanStatus.ISSUED):
                 raise ValueError("Book already issued to user")
 
         book["available_copies"] -= 1

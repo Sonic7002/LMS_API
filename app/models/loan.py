@@ -2,7 +2,7 @@ from uuid import uuid4
 from datetime import datetime
 from sqlalchemy import String, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from ..base import Base
+from ..db.base import Base
 
 class Loan(Base):
     __tablename__ = "loans"

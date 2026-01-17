@@ -2,7 +2,6 @@ from uuid import UUID
 from ..repos.user_repo import UserRepo
 from ..schemas.user import UserCreate
 
-
 class UserService:
     def __init__(self, repo: UserRepo):
         self.repo = repo
