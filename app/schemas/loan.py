@@ -13,6 +13,6 @@ class LoanRead(BaseModel):
     user_id: UUID
     book_id: UUID
     issued_at: datetime
-    due_at: datetime
+    # due_at: datetime
     returned_at: datetime | None
     status: LoanStatus

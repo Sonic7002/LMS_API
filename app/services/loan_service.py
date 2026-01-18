@@ -4,8 +4,19 @@ from ..repos.loan_repo import LoanRepo
 from ..repos.book_repo import BookRepo
 from ..repos.user_repo import UserRepo
 from ..schemas.loan import LoanStatus
+from ..models.loan import Loan
 
 class LoanService:
+    def _to_dict(self, data: Loan):
+        return {
+            "id": data.id,
+            "user_id": data.user_id,
+            "book_id": data.book_id,
+            "issued_at": data.issued_at,
+            "returned_at": data.returned_at,
+            "status": data.status
+        }
+
     def __init__(self, loan_repo: LoanRepo, book_repo: BookRepo, user_repo: UserRepo):
         self.loan_repo = loan_repo
         self.book_repo = book_repo
@@ -23,32 +34,28 @@ class LoanService:
 
         # prevent duplicate active loan
         for loan in self.loan_repo.list_all():
-            if (loan["user_id"] == user_id and loan["book_id"] == book_id and loan["status"] == LoanStatus.ISSUED):
+            if (loan.user_id == user_id and loan.book_id == book_id and loan.status == LoanStatus.ISSUED):
                 raise ValueError("Book already issued to user")
 
-        book["available_copies"] -= 1
-        return self.loan_repo.create(user_id, book_id)
+        book.available_copies -= 1
+        return self._to_dict(self.loan_repo.create(user_id, book_id))
 
-    def return_book(self, loan_id: UUID) -> dict:
+    def return_book(self, loan_id: UUID) -> dict: 
         loan = self.loan_repo.get_by_id(loan_id)
 
-        if not loan or loan["status"] != LoanStatus.ISSUED:
+        if not loan or loan.status != LoanStatus.ISSUED:
             raise ValueError("Invalid loan")
 
-        book = self.book_repo.get_by_id(loan["book_id"])
-        book["available_copies"] += 1
+        book = self.book_repo.get_by_id(loan.book_id)
+        book.available_copies += 1
 
-        loan["status"] = LoanStatus.RETURNED
-        loan["returned_at"] = datetime.utcnow()
+        loan.status = LoanStatus.RETURNED
+        loan.returned_at = datetime.utcnow()
 
-        return loan
+        return self._to_dict(loan)
 
     def list_loans(self) -> list[dict]:
         return self.loan_repo.list_all()
 
     def list_loans_for_user(self, user_id: UUID) -> list[dict]:
-        return [
-            loan
-            for loan in self.loan_repo.list_all()
-            if loan["user_id"] == user_id
-        ]
+        return [self._to_dict(loan) for loan in self.loan_repo.list_all() if loan["user_id"] == user_id]

@@ -16,8 +16,4 @@ def get_book_service() -> BookService:
     return BookService(book_repo)
 
 def get_loan_service() -> LoanService:
-    return LoanService(
-        loan_repo = loan_repo,
-        book_repo = book_repo,
-        user_repo = user_repo,
-    )
+    return LoanService(loan_repo = loan_repo, book_repo = book_repo, user_repo = user_repo)

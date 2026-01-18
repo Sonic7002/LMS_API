@@ -5,11 +5,11 @@ from sqlalchemy.orm import Session
 from app.core.security import verify_password
 from app.core.jwt import create_access_token
 from app.db.session import get_db
-from app.repos.user_repo import UserRepository
+from app.repos.user_repo import UserRepo
 from app.schemas.auth import Token
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-user_repo = UserRepository()
+user_repo = UserRepo()
 
 @router.post("/login", response_model=Token)
 def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
