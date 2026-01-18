@@ -6,6 +6,9 @@ from ..models.loan import Loan
 class LoanRepo:
     def create(self, db: Session, user_id: UUID, book_id: UUID) -> Loan:
         loan = Loan(user_id = str(user_id), book_id = str(book_id), status = LoanStatus.ISSUED)
+        db.add(loan)
+        db.commit()
+        db.refresh(loan)
         return loan
 
     def get_by_id(self, db: Session, loan_id: UUID) -> Loan | None:

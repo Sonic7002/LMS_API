@@ -8,7 +8,7 @@ class UserRepo:
     def create(self, db: Session, data: UserCreate) -> User:
         user = User(name = data.name, email = data.email, role = data.role)
         user.set_password(data.password)
-
+        
         db.add(user)
         db.commit()
         db.refresh(user)
