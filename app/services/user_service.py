@@ -20,7 +20,10 @@ class UserService:
         self.repo = repo
 
     def create_user(self, data: UserCreate, db: Session) -> dict:
-        return self._to_dict(self.repo.create(db, data))
+        user = self.repo.create(db, data)
+        if user:
+            return self._to_dict(user)
+        raise ValueError("email already exists")
 
     def get_user(self, user_id: UUID, db: Session) -> dict | None:
         return self._to_dict(self.repo.get_by_id(db, user_id))
