@@ -4,13 +4,16 @@ from sqlalchemy.orm import Session
 from ...db.session import get_db
 from app.schemas.book import BookCreate, BookRead
 from app.services.book_service import BookService
-from app.api.deps import get_book_service
+from app.api.dependencies.deps import get_book_service
+from ...models.user import User
+from ..dependencies.rbac import require_role
+from ...schemas.user import UserRole
 
 router = APIRouter(prefix="/books", tags=["books"])
 
 
 @router.post("/", response_model=BookRead)
-def create_book(data: BookCreate, service: BookService = Depends(get_book_service), db: Session = Depends(get_db)):
+def create_book(data: BookCreate, service: BookService = Depends(get_book_service), db: Session = Depends(get_db), _: User = Depends(require_role(UserRole.ADMIN))):
     return service.create_book(data, db)
 
 @router.get("/", response_model=list[BookRead])
