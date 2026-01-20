@@ -49,5 +49,5 @@ class LoanService:
         return self.loan_repo.list_all(db)
 
     # not still implemented in routes
-    def list_loans_for_user(self, user_id: UUID, db: Session) -> list[dict]:
+    def list_loans_for_user(self, user_id: UUID, db: Session) -> list[Loan]:
         return [loan for loan in self.loan_repo.list_all(db) if loan.user_id == str(user_id)]

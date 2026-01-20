@@ -25,3 +25,12 @@ class UserRepo:
     
     def list_all(self, db: Session) -> list[User]:
         return db.query(User).all()
+
+    def save(self, db: Session, user: User) -> User:
+        try:
+            db.commit()
+            db.refresh(user)
+            return user
+        except IntegrityError:
+            raise ValueError("email already exists")
+
