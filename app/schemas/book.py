@@ -1,6 +1,7 @@
 from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel, Field
+from typing import Optional
 
 class BookCreate(BaseModel):
     title: str
@@ -14,3 +15,8 @@ class BookRead(BaseModel):
     total_copies: int
     available_copies: int
     created_at: datetime
+
+class BookPatch(BaseModel):
+    title: Optional[str] = None
+    author: Optional[str] = None
+    total_copies: Optional[int] = None
