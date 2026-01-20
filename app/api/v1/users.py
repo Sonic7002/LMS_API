@@ -42,7 +42,7 @@ def deactivate(user_id: UUID, service: UserService = Depends(get_user_service), 
         raise HTTPException(status_code=400, detail=str(e))
     
 @router.patch("/activate/{user_id}", response_model=UserRead)
-def deactivate(user_id: UUID, service: UserService = Depends(get_user_service), db: Session = Depends(get_db), _: User = Depends(require_role(UserRole.ADMIN))):
+def activate(user_id: UUID, service: UserService = Depends(get_user_service), db: Session = Depends(get_db), _: User = Depends(require_role(UserRole.ADMIN))):
     try:
         user = service.activate(user_id,db)
         if not user:
