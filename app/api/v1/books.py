@@ -19,6 +19,7 @@ def create_book(data: BookCreate, service: BookService = Depends(get_book_servic
 @router.patch("/{book_id}", response_model=BookRead)
 def edit_book(data: BookPatch, book_id: UUID, service: BookService = Depends(get_book_service), db: Session = Depends(get_db), _: User = Depends(require_role(UserRole.ADMIN))):
     return service.edit_book(book_id, data, db)
+
 @router.get("/", response_model=list[BookRead])
 def list_books(service: BookService = Depends(get_book_service), db: Session = Depends(get_db)):
     return service.list_books(db)

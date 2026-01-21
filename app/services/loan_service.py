@@ -20,7 +20,7 @@ class LoanService:
         if not user or not book:
             raise ValueError("User or Book not found")
 
-        if book["available_copies"] <= 0:
+        if book.available_copies <= 0:
             raise ValueError("No copies available")
 
         # prevent duplicate active loan

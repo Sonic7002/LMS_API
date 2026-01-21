@@ -25,10 +25,10 @@ def return_book(loan_id: UUID, service: LoanService = Depends(get_loan_service),
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/me",response_model=LoanRead)
+@router.get("/me",response_model=list[LoanRead])
 def list_user_loans(service: LoanService = Depends(get_loan_service), db: Session = Depends(get_db), current_user: User = Depends(require_role(UserRole.ADMIN, UserRole.LIBRARIAN))):
     return service.list_loans_for_user(current_user.id, db)
 
-@router.get("/", response_model=LoanRead)
+@router.get("/", response_model=list[LoanRead])
 def list_loans(service: LoanService = Depends(get_loan_service), db: Session = Depends(get_db), _: User = Depends(require_role(UserRole.ADMIN, UserRole.LIBRARIAN))):
     return service.list_loans(db)

@@ -17,7 +17,7 @@ app = FastAPI(title="Library Management System")
 INITIAL_ADMIN_EMAIL = os.getenv("INITIAL_ADMIN_EMAIL")
 INITIAL_ADMIN_PASSWORD = os.getenv("INITIAL_ADMIN_PASSWORD")
 
-if not INITIAL_ADMIN_EMAIL or INITIAL_ADMIN_PASSWORD:
+if not INITIAL_ADMIN_EMAIL or not INITIAL_ADMIN_PASSWORD:
     raise RuntimeError("Missing initial admin email or password.")
 
 @app.on_event("startup")
