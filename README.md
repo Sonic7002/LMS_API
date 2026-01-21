@@ -5,6 +5,7 @@ A backend-first Library Management System API built with FastAPI and SQLAlchemy,
 This project intentionally focuses on backend correctness and design, not UI.
 
 ## 🚀 Features
+
 ### Core Functionality
 
 - User management (create, list, retrieve)
@@ -165,7 +166,7 @@ http://localhost:8000/docs
 
 - Deployment (Docker + cloud)
 
-- 📌 Project Status
+### 📌 Project Status
 
 **Core backend complete.**
 This project is considered feature-frozen for now and will be used as a base for:
@@ -177,4 +178,5 @@ This project is considered feature-frozen for now and will be used as a base for
 - Production hardening
 
 ### 👤 Author
-**Srijan Kargupta (c) 2026**
+
+Srijan Kargupta (c) 2026
