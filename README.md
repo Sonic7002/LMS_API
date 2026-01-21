@@ -131,7 +131,7 @@ An initial admin account is auto-created if the database is empty.
 **3.** Run the server:
 
 ```bash
-uvicorn main:app --reload
+fastapi run
 ```
 
 Swagger UI available at:
