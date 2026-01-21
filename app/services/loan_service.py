@@ -17,8 +17,11 @@ class LoanService:
         user = self.user_repo.get_by_id(db, user_id)
         book = self.book_repo.get_by_id(db, book_id)
 
-        if not user or not book:
+        if not user or not book :
             raise ValueError("User or Book not found")
+        
+        if not user.is_active:
+            raise ValueError("User has been deactivated")
 
         if book.available_copies <= 0:
             raise ValueError("No copies available")
