@@ -1,20 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from typing import Generator
+import os
 
-DATABASE_URL = "sqlite:///./lms.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(
-    DATABASE_URL,
-    echo=False,          # turn True when debugging SQL
-    future=True,
-)
+engine = create_engine(DATABASE_URL, echo=False, future=True)
+# turn echo True when debugging SQL
 
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 def get_db() -> Generator:
     db = SessionLocal()

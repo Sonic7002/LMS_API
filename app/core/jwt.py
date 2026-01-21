@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta
 from jose import jwt
 from uuid import UUID
+import os
 
-SECRET_KEY = "CHANGE_THIS_LATER"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 
 def create_access_token(user_id: UUID) -> str:
     payload = {

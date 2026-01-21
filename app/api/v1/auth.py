@@ -13,7 +13,7 @@ user_repo = UserRepo()
 
 @router.post("/login", response_model=Token)
 def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = user_repo.get_by_id(db, form.username)
+    user = user_repo.get_by_email(db, form.username)
 
     if not user or not verify_password(form.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
