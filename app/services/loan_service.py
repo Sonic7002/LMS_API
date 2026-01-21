@@ -54,3 +54,4 @@ class LoanService:
 
     def list_loans_for_user(self, user_id: UUID, db: Session) -> list[Loan]:
         return self.loan_repo.list_for_user(user_id, db)
+

@@ -12,4 +12,4 @@ class Book(Base):
     author: Mapped[str] = mapped_column(String(200), nullable = False)
     total_copies: Mapped[int] = mapped_column(Integer, nullable = False)
     available_copies: Mapped[int] = mapped_column(Integer, nullable = False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default = datetime.utcnow(), nullable = False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default = datetime.utcnow(), nullable = False)

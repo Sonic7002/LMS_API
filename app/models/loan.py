@@ -11,8 +11,9 @@ class Loan(Base):
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), nullable = False)
     book_id: Mapped[str] = mapped_column(ForeignKey("books.id"), nullable = False)
     status: Mapped[str] = mapped_column(String(20), nullable=False)
-    issued_at: Mapped[datetime] = mapped_column(DateTime, default = datetime.utcnow, nullable = False,)
-    returned_at: Mapped[datetime | None] = mapped_column(DateTime)
+    issued_at: Mapped[datetime] = mapped_column(DateTime(timezone = True), default = datetime.utcnow, nullable = False)
+    due_at: Mapped[datetime] = mapped_column(DateTime(timezone = True), nullable = False)
+    returned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     user = relationship("User")
     book = relationship("Book")

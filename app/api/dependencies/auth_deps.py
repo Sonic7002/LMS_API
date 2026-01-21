@@ -2,7 +2,6 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from jose import JWTError
-
 from app.core.jwt import decode_access_token
 from app.db.session import get_db
 from app.repos.user_repo import UserRepo
@@ -18,6 +17,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED)
 
     user = user_repo.get_by_id(db, user_id)
+
 
     if not user or not user.is_active:
         raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED)
