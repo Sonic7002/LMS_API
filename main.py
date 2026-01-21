@@ -14,14 +14,20 @@ import os
 Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Library Management System")
 
+INITIAL_ADMIN_EMAIL = os.getenv("INITIAL_ADMIN_EMAIL")
+INITIAL_ADMIN_PASSWORD = os.getenv("INITIAL_ADMIN_PASSWORD")
+
+if not INITIAL_ADMIN_EMAIL or INITIAL_ADMIN_PASSWORD:
+    raise RuntimeError("Missing initial admin email or password.")
+
 @app.on_event("startup")
 def create_initial_admin():
     db = SessionLocal()
     try:
-        admin_exists = db.query(User).filter(User.role == UserRole.ADMIN)
+        admin_exists = db.query(User).filter(User.role == UserRole.ADMIN).first()
         if not admin_exists:
-            user = User(name = "Super Admin", email = os.getenv("INITIAL_ADMIN_EMAIL"), role = UserRole.ADMIN)
-            user.set_password(os.getenv("INITIAL_ADMIN_PASSWORD"))
+            user = User(name = "Super Admin", email = INITIAL_ADMIN_EMAIL, role = UserRole.ADMIN)
+            user.set_password(INITIAL_ADMIN_PASSWORD)
             db.add(user)
             db.commit()
     finally:
