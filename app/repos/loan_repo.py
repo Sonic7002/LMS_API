@@ -12,7 +12,15 @@ class LoanRepo:
         return loan
 
     def get_by_id(self, db: Session, loan_id: UUID) -> Loan | None:
-        db.query(Loan).filter_by(Loan.id == str(loan_id)).first()
+        return db.query(Loan).filter(Loan.id == str(loan_id)).first()
 
     def list_all(self, db: Session) -> list[Loan]:
         return db.query(Loan).all()
+    
+    def list_for_user(self, user_id: UUID, db:Session) -> list[Loan]:
+        return db.query(Loan).filter(Loan.user_id == str(user_id)).all()
+    
+    def save(self, db: Session, loan: Loan):
+        db.commit()
+        db.refresh(loan)
+        return loan
