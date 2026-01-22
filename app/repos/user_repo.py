@@ -33,4 +33,3 @@ class UserRepo:
             return user
         except IntegrityError:
             raise ValueError("email already exists")
-

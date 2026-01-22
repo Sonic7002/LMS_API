@@ -64,7 +64,7 @@ This project intentionally focuses on backend correctness and design, not UI.
 
 - Uvicorn
 
-### 🔐 Roles & Permissions (RBAC)
+## 🔐 Roles & Permissions (RBAC)
 
 - ADMIN
 
@@ -88,7 +88,7 @@ This project intentionally focuses on backend correctness and design, not UI.
 
 Authorization is enforced using FastAPI dependencies, not inside route logic.
 
-### 🗃 Database Design
+## 🗃 Database Design
 
 - Relational schema with proper foreign keys
 
@@ -104,7 +104,7 @@ Authorization is enforced using FastAPI dependencies, not inside route logic.
 
 - Business state (e.g. overdue loans) is derived, not stored
 
-### ⚙️ Environment Configuration
+## ⚙️ Environment Configuration
 
 The application uses environment variables for configuration.
 
@@ -140,7 +140,7 @@ Swagger UI available at:
 http://localhost:8000/docs
 ```
 
-### 🧠 Design Decisions
+## 🧠 Design Decisions
 
 - FastAPI over Flask for type safety, validation, and dependency injection
 
@@ -152,7 +152,7 @@ http://localhost:8000/docs
 
 - Focus on correctness over shortcuts
 
-### 🚧 Future Improvements
+## 🚧 Future Improvements
 
 - PostgreSQL migration
 
@@ -166,7 +166,7 @@ http://localhost:8000/docs
 
 - Deployment (Docker + cloud)
 
-### 📌 Project Status
+## 📌 Project Status
 
 **Core backend complete.**
 This project is considered feature-frozen for now and will be used as a base for:
