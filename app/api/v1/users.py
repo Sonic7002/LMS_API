@@ -32,7 +32,7 @@ def me(current_user: User = Depends(get_current_user), service: UserService = De
 @router.patch("/deactivate/{user_id}", response_model=UserRead)
 def deactivate(user_id: UUID, service: UserService = Depends(get_user_service), db: Session = Depends(get_db), current_user: User = Depends(require_role(UserRole.ADMIN))):
     try:
-        if current_user.id == str(id):
+        if current_user.id == str(user_id):
             raise HTTPException(status_code=400, detail= "cannot deactivate self")
         user = service.deactivate(user_id,db)
         if not user:
