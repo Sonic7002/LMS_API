@@ -52,9 +52,9 @@ def activate(user_id: UUID, service: UserService = Depends(get_user_service), db
         raise HTTPException(status_code=400, detail=str(e))
 
 @router.patch("/{user_id}", response_model=UserRead)
-def edit_user(user_id: UUID, data: UserPatch,service: UserService = Depends(get_user_service), db: Session = Depends(get_db), _:User = Depends(require_role(UserRole.ADMIN, UserRole.MEMBER, UserRole.LIBRARIAN))):
+def edit_user(data: UserPatch, service: UserService = Depends(get_user_service), db: Session = Depends(get_db), current_user: User = Depends(require_role(UserRole.ADMIN, UserRole.MEMBER, UserRole.LIBRARIAN))):
     try:
-        user = service.edit_user(user_id, data, db)
+        user = service.edit_user(current_user.id, data, db)
         if not user:
             raise HTTPException(status_code=404, detail="Invlid user ID")
         return user
