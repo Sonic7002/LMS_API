@@ -1,7 +1,8 @@
+# login routes
+
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-
 from app.core.security import verify_password
 from app.core.jwt import create_access_token
 from app.db.session import get_db
@@ -13,6 +14,7 @@ user_repo = UserRepo()
 
 @router.post("/login", response_model=Token)
 def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    """verifies user using email and password nad issues jwt"""
     user = user_repo.get_by_email(db, form.username)
 
     if not user or not verify_password(form.password, user.hashed_password):
