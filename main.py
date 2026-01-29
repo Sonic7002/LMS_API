@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1 import users, books, loans
 from app.db.base import Base
 from app.db.session import engine
@@ -13,6 +14,9 @@ import os
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Library Management System")
+
+origins = os.getenv("ALLOWED_ORIGINS", "*")
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 INITIAL_ADMIN_EMAIL = os.getenv("INITIAL_ADMIN_EMAIL")
 INITIAL_ADMIN_PASSWORD = os.getenv("INITIAL_ADMIN_PASSWORD")
