@@ -44,7 +44,7 @@ class LoanService:
         book.available_copies += 1
 
         loan.status = LoanStatus.RETURNED
-        loan.returned_at = datetime.utcnow
+        loan.returned_at = datetime.utcnow()
         
         self.book_repo.save(db, book)
         return self.loan_repo.save(db, loan)
@@ -54,4 +54,3 @@ class LoanService:
 
     def list_loans_for_user(self, user_id: UUID, db: Session) -> list[Loan]:
         return self.loan_repo.list_for_user(user_id, db)
-
