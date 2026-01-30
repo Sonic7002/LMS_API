@@ -3,10 +3,9 @@ load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1 import users, books, loans
+from app.api.v1 import users, books, loans, auth, health
 from app.db.base import Base
 from app.db.session import engine
-from app.api.v1 import auth
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.schemas.user import UserRole
@@ -41,3 +40,4 @@ app.include_router(users.router, prefix="/api/v1")
 app.include_router(books.router, prefix="/api/v1")
 app.include_router(loans.router, prefix="/api/v1")
 app.include_router(auth.router)
+app.include_router(health.router)
