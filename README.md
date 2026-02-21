@@ -4,6 +4,11 @@ A backend-first Library Management System API built with FastAPI and SQLAlchemy,
 
 This project intentionally focuses on backend correctness and design, not UI.
 
+## Deployed link
+
+- deployed: https://lms-api-wtg5.onrender.com
+- open api docs: https://lms-api-wtg5.onrender.com/docs
+
 ## 🚀 Features
 
 ### Core Functionality
