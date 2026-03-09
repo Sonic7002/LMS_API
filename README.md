@@ -9,6 +9,11 @@ This project intentionally focuses on backend correctness and design, not UI.
 - deployed: <https://lms-api-wtg5.onrender.com>
 - open api docs: <https://lms-api-wtg5.onrender.com/docs>
 
+The API was previously deployed on Render.
+
+The public instance is currently offline due to free-tier resource limits.  
+The project can still be run locally using the instructions provided below.
+
 ## 🚀 Features
 
 ### Core Functionality
