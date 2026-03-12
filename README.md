@@ -64,7 +64,7 @@ The project can still be run locally using the instructions provided below.
 
 - SQLAlchemy 2.x
 
-- SQLite (development database)
+- Neon (PostgeSQL)
 
 - Pydantic
 
@@ -158,13 +158,11 @@ http://localhost:8000/docs
 
 - No hardcoded business states (e.g. overdue loans are computed)
 
-- SQLite first, PostgreSQL planned next
+- SQLite first, PostgreSQL planned next (executed)
 
 - Focus on correctness over shortcuts
 
 ## 🚧 Future Improvements
-
-- PostgreSQL migration
 
 - Alembic migrations
 
@@ -173,19 +171,6 @@ http://localhost:8000/docs
 - Account suspension automation
 
 - Penalty system for overdue loans
-
-- Deployment (Docker + cloud)
-
-## 📌 Project Status
-
-**Core backend complete.**
-This project is considered feature-frozen for now and will be used as a base for:
-
-- Deployment
-
-- Database migration to PostgreSQL
-
-- Production hardening
 
 ### 👤 Author
 
